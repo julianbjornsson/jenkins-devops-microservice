@@ -106,3 +106,45 @@ en azure devops, es para especificar dodne queremos que se corra y nos da mucha 
 Luego dividimos en stages, usamos stages {} y dentro colo camos cada stage por separado como se muestra. Dentro de cada stage, el step, y cada 
 step es que queremos hacer.
 
+Commiteamos con el script que hice (meta.bat), Desde el vamois vemos que al ver el output, pasa mas cosas que haciendolo con el scripted way.
+Lo que ocurre es que al hacerlo asi, se hace automaticamente un git checkout, hace una revision previa. ANtes cuando se hacia scripted se tenia 
+que hacer un stage para que haga el checkout y demas. Con el declarative way lo hace automaticamente. Tambien vemos que podemos configurar 
+mas coass para que pasen luego de que termine de correr la build . Vamos a agregarlo luego de los stages, como "post". Es decir, se corre 
+luego de que se termine la ejecucion de la pipeline. Hay varios tipos de post, y los vemos en el ejemplo:
+
+pipeline {
+	agent any
+	stages {
+		stage ('Build') {
+			steps {
+				echo "Build"
+			}
+		}
+		stage ('Test') {
+			steps {
+				echo "Test"
+			}
+		}
+		stage ('Integration Test') {
+			steps {
+				echo "Integration test"
+			}
+		}
+	} 
+    
+    post {
+        always {
+            echo 'SIEMPRE'
+        }
+        success {
+            echo 'SUCCESSFULLY RUN'
+        }
+        failure {
+            echo 'FAILURE'
+        }
+    }
+}
+Vemos que hay uno por cada posibilidad (por asi decirlo)
+
+Commiteamos y buildeamos:
+
