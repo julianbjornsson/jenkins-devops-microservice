@@ -71,3 +71,38 @@ Finished: SUCCESS
 Es decir, nos da info del pipeline y de run que le hicimos, nos ejhecuta los stages que marcamos y nos da el resultado que, en este caos, 
 es de success (logico, si solo estamos haciendo echo).
 
+El jenkinsfile simple este tiene lo que se llama "node", como vemos. Aca estamos usando algo llamado "scripted pipeline", y la palabra node aca 
+se refiere a una maquina en la que se corre el pipeline. Podes dividir el run de pipeline en multiples stages. Por ejemplo si haces para 
+CI/CD, los stages serian build, test, int test, páckage, deploy y demas. Todos los stages se pueden ver, lo cual hace muy facil ver en que estado 
+esta la ejecucion. En el caso de los scripted pipelnines, no es obligatorio usar stages, o sea podes poner solo los echo y funciona.
+
+En el proximo segmento vemos la forma que se usa actualmente. La forma anterior (scripted pipelines) era la forma anterior de hacerlo. 
+Ahora se hace lo que se llama declarative pipeline. En este nuevo metodo es obligatorio especificar stages y demas, es mas similar a 
+azure devops, como veremos. El script queda algo asi:
+
+pipeline {
+	agent any
+	stages {
+		stage ('Build') {
+			steps {
+				echo "Build"
+			}
+		}
+		stage ('Test') {
+			steps {
+				echo "Test"
+			}
+		}
+		stage ('Integration Test') {
+			steps {
+				echo "Integration test"
+			}
+		}
+	}
+}
+
+Vemos que el node ya no se usa, sino que usamos la keyword pipeline. En donde se va a correr? en el agent. El agent, funciona igual que 
+en azure devops, es para especificar dodne queremos que se corra y nos da mucha mas flexibilidad. En este caos ponemos any porque no es importante
+Luego dividimos en stages, usamos stages {} y dentro colo camos cada stage por separado como se muestra. Dentro de cada stage, el step, y cada 
+step es que queremos hacer.
+
