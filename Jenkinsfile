@@ -1,10 +1,7 @@
 pipeline {
 	agent {
-		docker {
-			image 'maven:3.6.3'
-			label 'dockerTest'
-		}
-	}
+        docker { image 'node:7-alpine' }
+    }
 	stages {
 		stage ('Build') {
 			steps {
