@@ -12,3 +12,62 @@ En la parte de abajo tenemos para añadir maven (para buildear) y docker.
 
 Le damos en add maven y le damos en install automatically, Le das un nombre y guardamos. 
 
+A priori lo primero que hacemos es crear el pipeline. Nuevo - pipeline
+
+Vemos que nos da opcion de configurar muchas cosas. Lo primero que vemos es que nos deja poner un trigger, o sea cuando se va a correr el 
+pipeline. En este caso vamos a usar la opcion de que sea periodico. Nos deja meter como si fuese para configurar crontab. Simplemente le 
+ponemos * * * * * porque queremos uqe corra cada un min, pero eso se ve
+
+Luego vamos a indicar que es lo que queremos correr. Vamos mas abajo y elegimos para hacerlo desde un SCM (Source code manager). Nos pide 
+que elijamos cual vamos a usar, marcamos GIT, y nos hace introducir el repo a usar. El proyectyo en si es bastante sencillo igual que este 
+procedimiento, es simplemente meter info para generar el pipeline. Es importante saber que al igual qu een docker se usa un dockerfile, en 
+jenkins esta lo que se llama Jenkinsfile. Estamos usando uno aca y en el pipeline, y el contenido es:
+
+node {
+	stage('Build') {
+		echo "Build"
+	}
+	stage('Test') {
+		echo "Test"
+	}
+	stage('Integration Test') {
+		echo "Test"
+	}
+}
+
+Que pasa con esto? Pues al correr el pipeline vemos que la build se triggerea y hace lo que ves aca, que es muy sencillo. Te printea 
+build, luego test y luego test den uevo, en 3 stages diferentes. Si buildeamos podemos ver la consola, y vemos que dice:
+
+Started by user Julian
+Obtained Jenkinsfile from git https://github.com/julianbjornsson/jenkins-devops-microservice
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/jenkins-devops-pipeline-1
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] echo
+Build
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] echo
+Test
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Integration Test)
+[Pipeline] echo
+Test
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+
+Es decir, nos da info del pipeline y de run que le hicimos, nos ejhecuta los stages que marcamos y nos da el resultado que, en este caos, 
+es de success (logico, si solo estamos haciendo echo).
+
