@@ -1,0 +1,14 @@
+Seccion Jenkins:
+
+Lo primero es instalar Jenkins. Usamos una instalacion con el docker compose que esta en la carpeta dl curso. Bsaicamente solo instala jenkins.
+Una vez terminado, te va a dar una clave de admin de un solo uso, instalas plugins recomendados y luego creas tu usuario y clave dej enkins.
+No hace falta ir muy en detalle en este proceso, asique vamos directo al contenido:
+
+Lo primero que hacemso con jenkins ya iniciado, en el caso de este proyecto es instalar maven y docker. Si vamos a configuracion vemos que hay 
+muchisimas cosas para poder administrar, desde credenciales hasta herramientas. Ahoira vamos a ir a la opcion Global Tool Configuration, y vamois 
+a instalar aca estos dos softwares como herramientas que podran ser usadas en multiples pipelines.
+
+En la parte de abajo tenemos para añadir maven (para buildear) y docker.
+
+Le damos en add maven y le damos en install automatically, Le das un nombre y guardamos. 
+
