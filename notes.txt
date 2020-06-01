@@ -146,5 +146,24 @@ pipeline {
 }
 Vemos que hay uno por cada posibilidad (por asi decirlo)
 
-Commiteamos y buildeamos:
+Commiteamos y buildeamos: al correr vemos que tambien nos trae SUCCESSFULLY y SIEMPRE, ya que buildeo ok y la otra la trae siempre.
+
+AHora, vamos a usar una imagen de docker como agent. Recien vimos qe tambien podemos configurar los agents para correr el pipeline. Entonces, 
+lo que vamos a probar ahora es eso. La forma para hacerlo es , en luigar de agent any:
+
+agent { docker { image 'maven:3.6.3'} }
+
+especificamos entre curly braces que usamos docker, y en otros la imagen a usar (entre comillas.)
+Vamos a agregar esto a nuestro jenkinsfile, y tambien vamos a poner para que en el buildeo corra el comando mvn --version, y queda(ahi):
+
+	agent { docker { image 'maven:3.6.3'} }
+	stages {
+		stage ('Build') {
+			steps {
+				sh 'mvn --version'
+				echo "Build"
+			}
+
+Commit, buildeamos :
+
 
