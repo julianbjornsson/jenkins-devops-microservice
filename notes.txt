@@ -171,4 +171,45 @@ bueno a mi me tira error, pero teoricamente esta todo bien.
 Hay una opcion que se llama pipeline syntax que es basicamente para darte la sintaxis de lo que sea que quieras hacer. Vas, elegis las 
 opciones, y te genera el code snippet para que uses.
 
+Despues vimos las variables que podemos usar, variables de entorno. EN este caso, mnodificamos el build para que en el medio te muestre 
+las variables:
+
+pipeline {
+	agent any
+	// agent { docker { image 'maven:3.6.3' } }
+	stages {
+		stage ('Build') {
+			steps {
+				// sh 'mvn --version'
+				echo "Build"
+				echo "PATH - $PATH"
+				echo "BUILD NUMBER - $env.BUILD_NUMBER"
+				echo "BUILD ID - $env.BUILD_ID"
+				echo "JOB NAME - $env.JOB_NAME"
+				echo "BUILD TAG - $env.BUILD_TAG"
+				echo "BUILD URL - $env.BUILD_URL"
+			}
+		}
+
+OUTPUT:
+
+Build
+[Pipeline] echo
+PATH - /usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[Pipeline] echo
+BUILD NUMBER - 22
+[Pipeline] echo
+BUILD ID - 22
+[Pipeline] echo
+JOB NAME - jenkins-devops-pipeline-1
+[Pipeline] echo
+BUILD TAG - jenkins-jenkins-devops-pipeline-1-22
+[Pipeline] echo
+BUILD URL - http://localhost:8081/job/jenkins-devops-pipeline-1/22/
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] echo
+
 
