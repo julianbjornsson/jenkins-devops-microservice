@@ -166,4 +166,9 @@ Vamos a agregar esto a nuestro jenkinsfile, y tambien vamos a poner para que en 
 
 Commit, buildeamos :
 
+bueno a mi me tira error, pero teoricamente esta todo bien.
+
+Hay una opcion que se llama pipeline syntax que es basicamente para darte la sintaxis de lo que sea que quieras hacer. Vas, elegis las 
+opciones, y te genera el code snippet para que uses.
+
 
